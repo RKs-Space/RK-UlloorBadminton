@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ulloor Badminton — June 2025 Tournament</title>
+<link rel="icon" type="image/x-icon" href="ulb.png">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  referrerpolicy="no-referrer"
+/>
+<style>
+:root{
+  --accent1:#28a745;
+  --accent2:#71dd8a;
+  --light-bg: linear-gradient(160deg,#fcfcfd,#f0fff0,#f7f8fc);
+  --dark-bg: linear-gradient(180deg,#020305,#05060a);
+  --muted-light:#6b7280;
+  --muted-dark:#98a6c4;
+  --max-width:1200px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif}
+body{transition:.3s}
+
+body.light{background:var(--light-bg);color:#0b1220}
+body.dark{background:var(--dark-bg);color:#e6eef8}
+
+/* ================= NAVBAR ================= */
+
+/* ================= NAVBAR ================= */
+.navbar{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:1000;
+  backdrop-filter: blur(10px);
+  background:rgba(255,255,255,.55);
+  border-bottom:1px solid rgba(0,0,0,.05);
+  transition:.3s;
+}
+body.dark .navbar{
+  background:rgba(10,12,16,.6);
+  border-color:rgba(255,255,255,.1);
+}
+
+.nav-inner{
+  max-width:var(--max-width);
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 16px; /* add some spacing between nav items and toggle */
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-size:1.05rem;
+}
+.logo img{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.logo a {
+  text-decoration: none;  /* remove underline */
+  color: inherit;         /* inherit text color from parent */
+  display: flex;          /* keep the flex layout */
+  align-items: center;
+  gap: 10px;
+}
+
+/* Nav items */
+.nav-items {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-left: auto;/* ensures it doesn’t overlap toggle */
+}
+
+/* Glass-like button */
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+  padding: 8px 16px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.2);
+  font-weight: 600;
+  transition: all 0.3s;
+}
+body.dark .nav-link {
+  background: rgba(10,12,16,0.25);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.nav-link:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+/* Hamburger menu for mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  margin-left: 16px;
+  z-index: 3200;
+}
+.hamburger span {
+  height: 3px;
+  width: 24px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+/* Mobile overlay menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(10px);
+  color:#fff;
+  z-index:3000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:40px;
+  text-align: center;
+  transition:.3s;
+}
+
+/* Mobile menu active */
+.mobile-menu.active {
+  display: flex;
+}
+
+/* Mobile links */
+.mobile-menu a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s;
+}
+.mobile-menu a:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* Close button */
+#closeMenu {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 2px solid #fff;
+  padding: 8px 16px;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 3100;
+}
+
+/* Theme-aware mobile menu */
+body.light .mobile-menu {
+  background: rgba(255,255,255,0.9);
+}
+body.light .mobile-menu a {
+  color: #0b1220;
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+body.light #closeMenu {
+  color: #0b1220;
+  border-color: #0b1220;
+  background: rgba(0,0,0,0.05);
+}
+
+/* Hamburger visible only on mobile */
+@media (max-width:768px){
+  .nav-items {display:none;}
+  .hamburger {display:flex;}
+}
+
+/* theme toggle */
+.theme-toggle{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  font-size:1.2rem;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 90px;
+  background: url("herobg.jpg") center/cover no-repeat;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.75));
+  z-index: 0;
+}
+
+
+.hero-inner{
+  max-width:var(--max-width);
+  margin:auto;
+  padding:40px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title{
+  font-size:3rem;
+  font-weight:900;
+  color:#fff;
+  line-height:1.1;
+}
+.hero-title span{color:var(--accent2)}
+
+.hero-sub{
+  max-width:520px;
+  color:#e6eef8;
+  margin:16px 0 28px;
+}
+
+/* ================= TOURNAMENTS ================= */
+
+.section{margin-top:56px}
+.section-title{
+  font-size:1.5rem;
+  font-weight:900;
+  color:#fff;
+  margin-bottom:18px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:rgba(255,255,255,.95);
+  border-radius:16px;
+  padding:16px;
+  cursor:pointer;
+  transition:.25s;
+  position:relative;
+}
+body.dark .card{background:rgba(18,22,28,.95)}
+
+.card:hover{transform:translateY(-6px)}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto 0;
+  height:5px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:16px 16px 0 0;
+}
+
+.tournament-title{font-weight:800;font-size:1.1rem}
+.tournament-dates{color:var(--muted-light);margin:6px 0 12px}
+
+.player{display:flex;gap:12px;margin-bottom:12px}
+.player-img{
+  width:60px;height:60px;border-radius:50%;
+  object-fit:cover;border:3px solid #fff;
+}
+.player-role{font-size:.75rem;color:var(--muted-light)}
+.player-name{font-weight:800}
+
+.coming{color:var(--muted-light)}
+.pill{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 12px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border-radius:999px;
+  font-weight:800;
+  font-size:.8rem;
+}
+
+
+/*Footer Styles*/
+/* ============ CLEAN FOOTER ============ */
+
+.site-footer{
+  padding:12px 16px;
+  font-size:.85rem;
+  display:flex;
+  justify-content:center;
+}
+
+.footer-inner{
+  width:100%;
+  max-width:var(--max-width);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  opacity:.75;
+}
+
+.footer-inner:hover{
+  opacity:1;
+}
+
+.copyright{
+  color:var(--muted-light);
+}
+
+body.dark .copyright{
+  color:var(--muted-dark);
+}
+
+/* YouTube icon clean style */
+.yt-link {
+  text-decoration: none;     /* remove underline */
+  color: #ff0000;            /* official YouTube red */
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.6rem;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(255, 0, 0, 0.08);
+}
+
+/* Prevent visited / active color changes */
+.yt-link:visited,
+.yt-link:active,
+.yt-link:focus {
+  color: #ff0000;
+  outline: none;
+}
+
+/* Hover effect */
+.yt-link:hover {
+  transform: scale(1.15);
+  color: #ff0000;
+}
+
+
+/*Table Styles*/
+table {
+      width: 90%;
+      margin: 1rem auto 2rem auto;
+      border-collapse: collapse;
+      background: rgba(30, 30, 30, 0.85);
+      border-radius: 10px;
+      overflow: hidden;
+      table-layout: fixed;
+      color: #e0e0e0;
+      box-shadow: 0 0 10px #2ecc71AA;
+    }
+    th, td {
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    th {
+      color: #2ecc71;
+      font-weight: bold;
+      background: rgba(30, 30, 30, 0.9);
+    }
+    tr:nth-child(even) {
+      background: rgba(26, 26, 26, 0.85);
+    }
+    tr:hover {
+      background: rgba(42, 42, 42, 0.9);
+    }
+    td.logo-cell {
+      width: 50px;
+      padding: 5px;
+    }
+    td.logo-cell img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2ecc71;
+    }
+
+    .card-container {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* MOBILE: hide table, show cards */
+    @media (max-width: 768px) {
+      table {
+        display: none !important;
+      }
+      .card {
+        display: block !important;
+      }
+    }
+
+    /* By default hide cards */
+    .card {
+      display: none;
+      background: rgba(26, 26, 26, 0.9);
+      margin: 1rem auto;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 90%;
+      box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+      transition: box-shadow 0.6s ease;
+      color: #e0e0e0;
+    }
+    .card:hover {
+      box-shadow: 0 0 15px rgba(46, 204, 113, 0.8);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 1rem;
+    }
+    .rank {
+      color: #00ffa2;
+      font-size: 1.5rem;
+      font-weight: 700;
+      min-width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.5s ease;
+    }
+    .rank.animate {
+      animation: scaleUp 0.5s forwards;
+    }
+    @keyframes scaleUp {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.6); }
+      100% { transform: scale(1); }
+    }
+    .player-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #2ecc71;
+      flex-shrink: 0;
+    }
+    .player-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .player-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #fff;
+      flex-grow: 1;
+    }
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #333;
+    }
+    .card-row:last-child {
+      border-bottom: none;
+    }
+    .label {
+      color: #aaa;
+      font-weight: 500;
+      flex-basis: 50%;
+      text-align: left;
+    }
+    .value {
+      color: #2ecc71;
+      font-weight: 700;
+      flex-basis: 50%;
+      text-align: right;
+    }
+    .card.animate-glow {
+      box-shadow: 0 0 15px 5px rgba(46, 204, 113, 0.7);
+      transition: box-shadow 1s ease;
+    }
+    .corner-image {
+ width: 100%;
+  max-width: 150px;  /* adjust based on your design */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  z-index: 1000;
+}
+.top-image-wrapper {
+  text-align: center !important;
+  margin-bottom: 20px; /* space between image and content */
+  margin-top: 10px;
+}
+/*Table Styles*/
+
+/*Mobile Footer Modification*/
+@media (max-width: 480px) {
+  .site-footer {
+    text-align: center;
+  }
+  .footer-inner {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+/*Mobile Footer Modification End*/
+</style>
+</head>
+
+<body class="light">
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="nav-inner">
+    
+    <div class="logo">
+      <a href="/">
+      <img src="ulb.png" alt="Ulloor Badminton">
+      Ulloor Badminton
+      </a>
+    </div>
+  
+
+    <div class="nav-items">
+      <a href="Tournament.html" class="nav-link">Tournaments</a>
+      <a href="/" class="nav-link">About Us</a>
+      <a href="/" class="nav-link">Contact</a>
+    </div>
+
+    <div class="theme-toggle" id="themeSwitch" title="Toggle theme">
+      <svg id="sunIcon" width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="5" fill="#28a745"/>
+        <g stroke="#28a745" stroke-width="2">
+          <line x1="12" y1="1" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="23"/>
+          <line x1="1" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="23" y2="12"/>
+          <line x1="4.2" y1="4.2" x2="6.4" y2="6.4"/>
+          <line x1="17.6" y1="17.6" x2="19.8" y2="19.8"/>
+          <line x1="4.2" y1="19.8" x2="6.4" y2="17.6"/>
+          <line x1="17.6" y1="6.4" x2="19.8" y2="4.2"/>
+        </g>
+      </svg>
+    
+      <svg id="moonIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" style="display:none">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3
+                 A7 7 0 0 0 21 12.8Z"
+              fill="#28a745"/>
+      </svg>
+    </div>
+
+    <!-- Hamburger for mobile -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- Mobile overlay menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button type="button" id="closeMenu">✕</button>
+    <a href="Tournament.html">Tournaments</a>
+    <a href="\">About us</a>
+    <a href="\">Contact</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="main_container">
+  
+    <!-- Desktop Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Profile</th>
+          <th>Played</th>
+          <th>Won</th>
+          <th>Lost</th>
+          <th>Difference</th>
+          <th>Points</th>
+          <th>Win%</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Dynamic rows inserted here -->
+      </tbody>
+    </table>
+  
+    <!-- Mobile Cards -->
+    <div class="card-container" id="card-container">
+      <!-- Dynamic cards inserted here -->
+    </div>
+  
+  </div>
+  </div>
+</section>
+
+<script>
+  // Theme toggle
+const bodyEl = document.body;
+const sunIcon = document.getElementById("sunIcon");
+const moonIcon = document.getElementById("moonIcon");
+let savedTheme = localStorage.getItem("ub_theme") || "dark";
+
+function setTheme(t){
+  bodyEl.className = t;
+  sunIcon.style.display = t === "light" ? "block" : "none";
+  moonIcon.style.display = t === "dark" ? "block" : "none";
+  localStorage.setItem("ub_theme", t);
+}
+setTheme(savedTheme);
+document.getElementById("themeSwitch").onclick = () => {
+  setTheme(bodyEl.classList.contains("dark") ? "light" : "dark");
+};
+
+// Hamburger toggle
+const hamburger = document.getElementById("hamburger");
+const mobileMenu = document.getElementById("mobileMenu");
+const closeMenu = document.getElementById("closeMenu");
+
+hamburger.onclick = () => {
+  mobileMenu.classList.add("active");
+  hamburger.style.display = 'none';
+  document.body.style.overflow = "hidden";
+};
+
+closeMenu.onclick = () => {
+  mobileMenu.classList.remove("active");
+  hamburger.style.display = 'flex';
+  document.body.style.overflow = "auto";
+};
+/* ================= ORIGINAL WORKING LOGIC (RESTORED) ================= */
+
+const SHEET_URL =
+  "https://script.google.com/macros/s/AKfycbz0_inrWly5bIK8Beye6CHu6ipBdsfWPQfG_X2pN-CXoLwH7xg_-r2WJEUE-y3KmXCysw/exec";
+
+const ALL_ORIGINS =
+  "https://api.allorigins.win/raw?url=" + encodeURIComponent(SHEET_URL);
+
+/* ---------- Robust fetch ---------- */
+async function fetchSheetData() {
+  try {
+    // 1️⃣ Try direct fetch first
+    const res = await fetch(SHEET_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error("Direct fetch failed");
+    return await res.json();
+  } catch (directErr) {
+    console.warn("Direct fetch failed, retrying via proxy…");
+
+    try {
+      // 2️⃣ Fallback to proxy
+      const proxyRes = await fetch(ALL_ORIGINS + "&t=" + Date.now());
+      if (!proxyRes.ok) throw new Error("Proxy fetch failed");
+      return await proxyRes.json();
+    } catch (proxyErr) {
+      console.error("Both fetch methods failed", proxyErr);
+      return null;
+    }
+  }
+}
+
+/* ---------- Render table + cards ---------- */
+async function loadSheetData() {
+  const data = await fetchSheetData();
+  if (!Array.isArray(data)) {
+    console.warn("No data received");
+    return;
+  }
+
+  const tbody = document.getElementById("table-body");
+  const cardContainer = document.getElementById("card-container");
+
+  tbody.innerHTML = "";
+  cardContainer.innerHTML = "";
+
+  data.forEach(player => {
+    const rank = player.Rank || "";
+    const name = player.Name || "";
+    const profile = player.Profile || "";
+    const played = player.Played || "";
+    const won = player.Won || "";
+    const lost = player.Lost || "";
+    const diff = player.Difference || "";
+    const points = player.Points || "";
+    const winPerc =
+      player["Win %"] !== undefined
+        ? (player["Win %"] * 100).toFixed(2) + "%"
+        : "";
+
+    /* Desktop row */
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${rank}</td>
+      <td>${name}</td>
+      <td class="logo-cell"><img src="${profile}" alt="${name}"></td>
+      <td>${played}</td>
+      <td>${won}</td>
+      <td>${lost}</td>
+      <td>${diff}</td>
+      <td>${points}</td>
+      <td>${winPerc}</td>
+    `;
+    tbody.appendChild(tr);
+
+    /* Mobile card */
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="rank">#${rank}</div>
+        <div class="player-logo"><img src="${profile}" alt="${name}"></div>
+        <div class="player-name">${name}</div>
+      </div>
+      <div class="card-row"><span class="label">Played</span><span class="value">${played}</span></div>
+      <div class="card-row"><span class="label">Won</span><span class="value">${won}</span></div>
+      <div class="card-row"><span class="label">Lost</span><span class="value">${lost}</span></div>
+      <div class="card-row"><span class="label">Difference</span><span class="value">${diff}</span></div>
+      <div class="card-row"><span class="label">Points</span><span class="value">${points}</span></div>
+      <div class="card-row"><span class="label">Win %</span><span class="value">${winPerc}</span></div>
+    `;
+    cardContainer.appendChild(card);
+  });
+}
+
+/* ---------- Start ---------- */
+loadSheetData();
+//setInterval(loadSheetData, 5000);
+</script>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="copyright">
+      © <span id="year"></span>  Ulloor Badminton. Conceptualised, developed, and maintained by Rahul. All rights reserved.
+    </span>
+    <a class="yt-link" href="https://www.youtube.com/@ulloorbadminton00" target="_blank" aria-label="YouTube">
+      <i class="fa-brands fa-youtube"></i>
+    </a>    
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  
+  </body>
+  </html>
