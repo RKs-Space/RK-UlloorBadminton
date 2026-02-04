@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ulloor Badminton — Tournaments Hub</title>
+<title>Ulloor Badminton — June 2025 Tournament</title>
 <link rel="icon" type="image/x-icon" href="ulb.png">
 <link
   rel="stylesheet"
@@ -363,6 +363,168 @@ body.dark .copyright{
   transform: scale(1.15);
   color: #ff0000;
 }
+
+
+/*Table Styles*/
+table {
+      width: 90%;
+      margin: 1rem auto 2rem auto;
+      border-collapse: collapse;
+      background: rgba(30, 30, 30, 0.85);
+      border-radius: 10px;
+      overflow: hidden;
+      table-layout: fixed;
+      color: #e0e0e0;
+      box-shadow: 0 0 10px #2ecc71AA;
+    }
+    th, td {
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    th {
+      color: #2ecc71;
+      font-weight: bold;
+      background: rgba(30, 30, 30, 0.9);
+    }
+    tr:nth-child(even) {
+      background: rgba(26, 26, 26, 0.85);
+    }
+    tr:hover {
+      background: rgba(42, 42, 42, 0.9);
+    }
+    td.logo-cell {
+      width: 50px;
+      padding: 5px;
+    }
+    td.logo-cell img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2ecc71;
+    }
+
+    .card-container {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* MOBILE: hide table, show cards */
+    @media (max-width: 768px) {
+      table {
+        display: none !important;
+      }
+      .card {
+        display: block !important;
+      }
+    }
+
+    /* By default hide cards */
+    .card {
+      display: none;
+      background: rgba(26, 26, 26, 0.9);
+      margin: 1rem auto;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 90%;
+      box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
+      transition: box-shadow 0.6s ease;
+      color: #e0e0e0;
+    }
+    .card:hover {
+      box-shadow: 0 0 15px rgba(46, 204, 113, 0.8);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 1rem;
+    }
+    .rank {
+      color: #00ffa2;
+      font-size: 1.5rem;
+      font-weight: 700;
+      min-width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.5s ease;
+    }
+    .rank.animate {
+      animation: scaleUp 0.5s forwards;
+    }
+    @keyframes scaleUp {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.6); }
+      100% { transform: scale(1); }
+    }
+    .player-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #2ecc71;
+      flex-shrink: 0;
+    }
+    .player-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .player-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #fff;
+      flex-grow: 1;
+    }
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #333;
+    }
+    .card-row:last-child {
+      border-bottom: none;
+    }
+    .label {
+      color: #aaa;
+      font-weight: 500;
+      flex-basis: 50%;
+      text-align: left;
+    }
+    .value {
+      color: #2ecc71;
+      font-weight: 700;
+      flex-basis: 50%;
+      text-align: right;
+    }
+    .card.animate-glow {
+      box-shadow: 0 0 15px 5px rgba(46, 204, 113, 0.7);
+      transition: box-shadow 1s ease;
+    }
+    .corner-image {
+ width: 100%;
+  max-width: 150px;  /* adjust based on your design */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  z-index: 1000;
+}
+.top-image-wrapper {
+  text-align: center !important;
+  margin-bottom: 20px; /* space between image and content */
+  margin-top: 10px;
+}
+/*Table Styles*/
+
 /*Mobile Footer Modification*/
 @media (max-width: 480px) {
   .site-footer {
@@ -439,10 +601,34 @@ body.dark .copyright{
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="section" id="tournaments">
-      <div class="section-title">Tournaments</div>
-      <div id="grid" class="grid"></div>
+    <div class="main_container">
+  
+    <!-- Desktop Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Profile</th>
+          <th>Played</th>
+          <th>Won</th>
+          <th>Lost</th>
+          <th>Difference</th>
+          <th>Points</th>
+          <th>Win%</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Dynamic rows inserted here -->
+      </tbody>
+    </table>
+  
+    <!-- Mobile Cards -->
+    <div class="card-container" id="card-container">
+      <!-- Dynamic cards inserted here -->
     </div>
+  
+  </div>
   </div>
 </section>
 
@@ -482,102 +668,100 @@ closeMenu.onclick = () => {
 };
 /* ================= ORIGINAL WORKING LOGIC (RESTORED) ================= */
 
-const tournaments = [
-  {
-    title: "Ranking Tournament Doubles",
-    dates: "June 2025 – Aug 2025",
-    sheetUrl: "https://script.google.com/macros/s/AKfycbz0_inrWly5bIK8Beye6CHu6ipBdsfWPQfG_X2pN-CXoLwH7xg_-r2WJEUE-y3KmXCysw/exec",
-    page: "tournament-ranking-doubles.html"
-  },
-  {
-    title: "Ulloor New Year Cup 2026",
-    dates: "Feb 4 – Ongoing",
-    sheetUrl: "https://script.google.com/macros/s/AKfycbzOxPWHtJxid5sVUzUTFYc72e574soUynuP7yKFkfMUkwTIAn_6rVQuOVAg7ukQg0nwGw/exec",
-    page: "NewYear Cup-T6.html"
-  }
-];
+const SHEET_URL =
+  "https://script.google.com/macros/s/AKfycbzOxPWHtJxid5sVUzUTFYc72e574soUynuP7yKFkfMUkwTIAn_6rVQuOVAg7ukQg0nwGw/exec";
 
-const DEFAULT_IMAGE = "https://via.placeholder.com/120";
+const ALL_ORIGINS =
+  "https://api.allorigins.win/raw?url=" + encodeURIComponent(SHEET_URL);
 
+/* ---------- Robust fetch ---------- */
+async function fetchSheetData() {
+  try {
+    // 1️⃣ Try direct fetch first
+    const res = await fetch(SHEET_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error("Direct fetch failed");
+    return await res.json();
+  } catch (directErr) {
+    console.warn("Direct fetch failed, retrying via proxy…");
 
-
-function isValidURL(u){
-  if(!u) return false;
-  return String(u).trim()!=="" && !/^(none|null|n\/a)$/i.test(u);
-}
-function imgSrc(u){ return isValidURL(u)?u:DEFAULT_IMAGE; }
-
-function pickTopPlayers(data){
-  if(!Array.isArray(data)||!data.length) return {champion:null,runnerup:null};
-  const get=r=>({name:r.Name||r.name||"",photo:r.Profile||r.profile||""});
-  let champ=data.find(d=>String(d.Rank||d.rank)==="1")||data[0];
-  let run=data.find(d=>String(d.Rank||d.rank)==="2");
-  return {
-    champion:champ?get(champ):null,
-    runnerup:run?get(run):null
-  };
-}
-
-function makeCard(t,players){
-  const c=document.createElement("div");
-  c.className="card";
-  c.onclick=()=>location.href=t.page;
-
-  c.innerHTML=`
-    <div class="tournament-title">${t.title}</div>
-    <div class="tournament-dates">${t.dates}</div>
-  `;
-
-  if(players && players.champion){
-    const champ=document.createElement("div");
-    champ.className="player";
-    champ.innerHTML=`
-      <img class="player-img" src="${imgSrc(players.champion.photo)}">
-      <div>
-        <div class="player-role">Champion</div>
-        <div class="player-name">${players.champion.name||"—"}</div>
-      </div>`;
-    c.appendChild(champ);
-
-    if(players.runnerup){
-      const run=document.createElement("div");
-      run.className="player";
-      run.innerHTML=`
-        <img class="player-img" src="${imgSrc(players.runnerup.photo)}">
-        <div>
-          <div class="player-role">Runner Up</div>
-          <div class="player-name">${players.runnerup.name||"—"}</div>
-        </div>`;
-      c.appendChild(run);
-    }
-  } else {
-    c.innerHTML+=`
-      <div class="coming">Leaderboard coming soon</div>
-      <div class="pill">Coming soon</div>`;
-  }
-  return c;
-}
-
-(async function loadAll(){
-  const grid=document.getElementById("grid");
-  for(const t of tournaments){
-    if(!t.sheetUrl){
-      grid.appendChild(makeCard(t,null));
-      continue;
-    }
-    try{
-      // direct fetch to Google Apps Script
-      const res = await fetch(t.sheetUrl, { method: "GET" });
-      if(!res.ok) throw new Error("Failed to fetch");
-      const data = await res.json(); // expect JSON array [{Rank, Name, Profile}, ...]
-      const players = pickTopPlayers(data);
-      grid.appendChild(makeCard(t, players));
-    } catch(e){
-      console.warn("Fetch failed for", t.title, e);
-      grid.appendChild(makeCard(t,null)); // fallback
+    try {
+      // 2️⃣ Fallback to proxy
+      const proxyRes = await fetch(ALL_ORIGINS + "&t=" + Date.now());
+      if (!proxyRes.ok) throw new Error("Proxy fetch failed");
+      return await proxyRes.json();
+    } catch (proxyErr) {
+      console.error("Both fetch methods failed", proxyErr);
+      return null;
     }
   }
-})();
+}
+
+/* ---------- Render table + cards ---------- */
+async function loadSheetData() {
+  const data = await fetchSheetData();
+  if (!Array.isArray(data)) {
+    console.warn("No data received");
+    return;
+  }
+
+  const tbody = document.getElementById("table-body");
+  const cardContainer = document.getElementById("card-container");
+
+  tbody.innerHTML = "";
+  cardContainer.innerHTML = "";
+
+  data.forEach(player => {
+    const rank = player.Rank || "";
+    const name = player.Name || "";
+    const profile = player.Profile || "";
+    const played = player.Played || "";
+    const won = player.Won || "";
+    const lost = player.Lost || "";
+    const diff = player.Difference || "";
+    const points = player.Points || "";
+    const winPerc =
+      player["Win %"] !== undefined
+        ? (player["Win %"] * 100).toFixed(2) + "%"
+        : "";
+
+    /* Desktop row */
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${rank}</td>
+      <td>${name}</td>
+      <td class="logo-cell"><img src="${profile}" alt="${name}"></td>
+      <td>${played}</td>
+      <td>${won}</td>
+      <td>${lost}</td>
+      <td>${diff}</td>
+      <td>${points}</td>
+      <td>${winPerc}</td>
+    `;
+    tbody.appendChild(tr);
+
+    /* Mobile card */
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="rank">#${rank}</div>
+        <div class="player-logo"><img src="${profile}" alt="${name}"></div>
+        <div class="player-name">${name}</div>
+      </div>
+      <div class="card-row"><span class="label">Played</span><span class="value">${played}</span></div>
+      <div class="card-row"><span class="label">Won</span><span class="value">${won}</span></div>
+      <div class="card-row"><span class="label">Lost</span><span class="value">${lost}</span></div>
+      <div class="card-row"><span class="label">Difference</span><span class="value">${diff}</span></div>
+      <div class="card-row"><span class="label">Points</span><span class="value">${points}</span></div>
+      <div class="card-row"><span class="label">Win %</span><span class="value">${winPerc}</span></div>
+    `;
+    cardContainer.appendChild(card);
+  });
+}
+
+/* ---------- Start ---------- */
+loadSheetData();
+//setInterval(loadSheetData, 5000);
 </script>
 <footer class="site-footer">
   <div class="footer-inner">
