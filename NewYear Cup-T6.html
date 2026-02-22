@@ -764,7 +764,7 @@ table {
             <th>Matches Played</th>
             <th>Wins</th>
             <th>Loses</th>
-            <th>Points Combined</th>
+            <th>Per Match Avg Diff</th>
             <th>Difference</th>
             <th>Win%</th>
           </tr>
@@ -984,7 +984,7 @@ async function loadTeamsSheetData() {
     const matchesPlayed = team["Team Matches Played"] !== undefined ? team["Team Matches Played"] : "";
     const wins = team["Team Wins"] !== undefined ? team["Team Wins"] : "";
     const loses = team["Team Loses"] !== undefined ? team["Team Loses"] : "";
-    const pointsCombined = team["Team Points Combined"] !== undefined ? team["Team Points Combined"] : "";
+    const diffPerMatchAvg = team["Diff Per Match Avg"] !== undefined ? team["Diff Per Match Avg"] : "";
     const difference = team["Team Difference"] !== undefined ? team["Team Difference"] : "";
     const winPerc =
       team["Team Win%"] !== undefined
@@ -999,7 +999,7 @@ async function loadTeamsSheetData() {
       <td>${matchesPlayed}</td>
       <td>${wins}</td>
       <td>${loses}</td>
-      <td>${pointsCombined}</td>
+      <td>${diffPerMatchAvg}</td>
       <td>${difference}</td>
       <td>${winPerc}</td>
     `;
@@ -1016,7 +1016,7 @@ async function loadTeamsSheetData() {
       <div class="card-row"><span class="label">Matches Played</span><span class="value">${matchesPlayed}</span></div>
       <div class="card-row"><span class="label">Wins</span><span class="value">${wins}</span></div>
       <div class="card-row"><span class="label">Loses</span><span class="value">${loses}</span></div>
-      <div class="card-row"><span class="label">Points Combined</span><span class="value">${pointsCombined}</span></div>
+      <div class="card-row"><span class="label">Per Match Avg Diff</span><span class="value">${diffPerMatchAvg}</span></div>
       <div class="card-row"><span class="label">Difference</span><span class="value">${difference}</span></div>
       <div class="card-row"><span class="label">Win %</span><span class="value">${winPerc}</span></div>
     `;
