@@ -22,6 +22,7 @@
 }
 
 *{box-sizing:border-box}
+html{scrollbar-gutter:stable}
 html,body{margin:0;font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif}
 body{transition:.3s}
 
@@ -212,7 +213,20 @@ body.light #closeMenu {
   position: relative;
   min-height: 100vh;
   padding-top: 90px;
-  background: url("herobg.jpg") center/cover no-repeat;
+  background: url("herobg.jpg") center/cover no-repeat fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 200px;
+}
+
+/* Mobile: center vertically */
+@media (max-width: 768px) {
+  .hero {
+    justify-content: center;
+    padding-top: 90px;
+  }
 }
 
 .hero::after {
@@ -227,7 +241,7 @@ body.light #closeMenu {
 
 .hero-inner{
   max-width:var(--max-width);
-  margin:auto;
+  width: 100%;
   padding:40px 20px;
   position: relative;
   z-index: 1;
@@ -525,6 +539,102 @@ table {
 }
 /*Table Styles*/
 
+/* ================= COLLAPSIBLE STYLES ================= */
+.main_container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.collapsible-header {
+  width: 90%;
+  max-width: 100%;
+  margin: 1rem auto 0 auto;
+  padding: 16px;
+  background: rgba(18,22,28,.95);
+  border: 2px solid #2ecc71;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2ecc71;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.collapsible-header:hover {
+  background: rgba(30, 35, 42, 0.95);
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
+}
+
+.collapsible-header .chevron {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+  color: #2ecc71;
+}
+
+.collapsible-header.active .chevron {
+  transform: rotate(180deg);
+}
+
+body.light .collapsible-header {
+  background: rgba(240, 241, 245, 0.95);
+  border-color: #28a745;
+  color: #28a745;
+}
+
+body.light .collapsible-header:hover {
+  background: rgba(220, 225, 235, 0.95);
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.4);
+}
+
+body.light .collapsible-header .chevron {
+  color: #28a745;
+}
+
+.collapsible-content {
+  width: 90%;
+  margin: 0 auto;
+  border: 2px solid #2ecc71;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  max-height: 2000px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.collapsible-content.collapsed {
+  max-height: 0;
+  overflow-y: hidden;
+  opacity: 0;
+}
+
+/* Mobile view - restrict height and enable scrolling */
+@media (max-width: 768px) {
+  .collapsible-content {
+    max-height: 70vh;
+  }
+}
+
+body.light .collapsible-content {
+  border-color: #28a745;
+}
+
+table {
+  border-radius: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
 /*Mobile Footer Modification*/
 @media (max-width: 480px) {
   .site-footer {
@@ -555,8 +665,8 @@ table {
 
     <div class="nav-items">
       <a href="Tournament.html" class="nav-link">Tournaments</a>
-      <a href="/" class="nav-link">About Us</a>
-      <a href="/" class="nav-link">Contact</a>
+      <a href="About.html" class="nav-link">About Us</a>
+      <a href="Contact.html" class="nav-link">Contact</a>
     </div>
 
     <div class="theme-toggle" id="themeSwitch" title="Toggle theme">
@@ -601,31 +711,73 @@ table {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="main_container">
+  <div class="main_container">
   
-    <!-- Desktop Table -->
-    <table>
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Player</th>
-          <th>Profile</th>
-          <th>Played</th>
-          <th>Won</th>
-          <th>Lost</th>
-          <th>Difference</th>
-          <th>Points</th>
-          <th>Win%</th>
-        </tr>
-      </thead>
-      <tbody id="table-body">
-        <!-- Dynamic rows inserted here -->
-      </tbody>
-    </table>
-  
-    <!-- Mobile Cards -->
-    <div class="card-container" id="card-container">
-      <!-- Dynamic cards inserted here -->
+    <!-- Collapsible Header -->
+    <div class="collapsible-header" id="collapsibleBtn">
+      <span>🏆 Individual Rankings</span>
+      <span class="chevron">▼</span>
+    </div>
+
+    <!-- Collapsible Content with Table and Cards -->
+    <div class="collapsible-content collapsed" id="collapsibleContent">
+      <!-- Desktop Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Profile</th>
+            <th>Played</th>
+            <th>Won</th>
+            <th>Lost</th>
+            <th>Difference</th>
+            <th>Points</th>
+            <th>Win%</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Dynamic rows inserted here -->
+        </tbody>
+      </table>
+    
+      <!-- Mobile Cards -->
+      <div class="card-container" id="card-container">
+        <!-- Dynamic cards inserted here -->
+      </div>
+    </div>
+
+    <!-- Collapsible Header for Teams -->
+    <div class="collapsible-header" id="teamsCollapsibleBtn">
+      <span>🏅 Teams Rankings</span>
+      <span class="chevron">▼</span>
+    </div>
+
+    <!-- Collapsible Content with Teams Table and Cards -->
+    <div class="collapsible-content collapsed" id="teamsCollapsibleContent">
+      <!-- Desktop Teams Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Unique Teams</th>
+            <th>Matches Played</th>
+            <th>Wins</th>
+            <th>Loses</th>
+            <th>Points Combined</th>
+            <th>Difference</th>
+            <th>Win%</th>
+          </tr>
+        </thead>
+        <tbody id="teams-table-body">
+          <!-- Dynamic rows inserted here -->
+        </tbody>
+      </table>
+    
+      <!-- Mobile Teams Cards -->
+      <div class="card-container" id="teams-card-container">
+        <!-- Dynamic cards inserted here -->
+      </div>
     </div>
   
   </div>
@@ -666,6 +818,25 @@ closeMenu.onclick = () => {
   hamburger.style.display = 'flex';
   document.body.style.overflow = "auto";
 };
+
+// Collapsible toggle
+const collapsibleBtn = document.getElementById("collapsibleBtn");
+const collapsibleContent = document.getElementById("collapsibleContent");
+
+collapsibleBtn.onclick = () => {
+  collapsibleBtn.classList.toggle("active");
+  collapsibleContent.classList.toggle("collapsed");
+};
+
+// Teams Collapsible toggle
+const teamsCollapsibleBtn = document.getElementById("teamsCollapsibleBtn");
+const teamsCollapsibleContent = document.getElementById("teamsCollapsibleContent");
+
+teamsCollapsibleBtn.onclick = () => {
+  teamsCollapsibleBtn.classList.toggle("active");
+  teamsCollapsibleContent.classList.toggle("collapsed");
+};
+
 /* ================= ORIGINAL WORKING LOGIC (RESTORED) ================= */
 
 const SHEET_URL =
@@ -762,6 +933,100 @@ async function loadSheetData() {
 /* ---------- Start ---------- */
 loadSheetData();
 //setInterval(loadSheetData, 5000);
+
+/* ================= TEAMS DATA LOADING ================= */
+
+const TEAMS_SHEET_URL =
+  "https://script.google.com/macros/s/AKfycbziAN6XZQwtv2d83Eft-nhhHRiG-w1mBTHkg1WLPYHJGdG99yy8V-88rVWJ688lzL5wCw/exec";
+
+const TEAMS_ALL_ORIGINS =
+  "https://api.allorigins.win/raw?url=" + encodeURIComponent(TEAMS_SHEET_URL);
+
+/* ---------- Robust fetch for Teams ---------- */
+async function fetchTeamsSheetData() {
+  try {
+    // 1️⃣ Try direct fetch first
+    const res = await fetch(TEAMS_SHEET_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error("Direct fetch failed");
+    return await res.json();
+  } catch (directErr) {
+    console.warn("Direct fetch failed, retrying via proxy…");
+
+    try {
+      // 2️⃣ Fallback to proxy
+      const proxyRes = await fetch(TEAMS_ALL_ORIGINS + "&t=" + Date.now());
+      if (!proxyRes.ok) throw new Error("Proxy fetch failed");
+      return await proxyRes.json();
+    } catch (proxyErr) {
+      console.error("Both fetch methods failed", proxyErr);
+      return null;
+    }
+  }
+}
+
+/* ---------- Render teams table + cards ---------- */
+async function loadTeamsSheetData() {
+  const data = await fetchTeamsSheetData();
+  if (!Array.isArray(data)) {
+    console.warn("No teams data received");
+    return;
+  }
+
+  const tbody = document.getElementById("teams-table-body");
+  const cardContainer = document.getElementById("teams-card-container");
+
+  tbody.innerHTML = "";
+  cardContainer.innerHTML = "";
+
+  data.forEach(team => {
+    const rank = team.Rank !== undefined ? team.Rank : "";
+    const uniqueTeams = team["Unique Teams"] !== undefined ? team["Unique Teams"] : "";
+    const matchesPlayed = team["Team Matches Played"] !== undefined ? team["Team Matches Played"] : "";
+    const wins = team["Team Wins"] !== undefined ? team["Team Wins"] : "";
+    const loses = team["Team Loses"] !== undefined ? team["Team Loses"] : "";
+    const pointsCombined = team["Team Points Combined"] !== undefined ? team["Team Points Combined"] : "";
+    const difference = team["Team Difference"] !== undefined ? team["Team Difference"] : "";
+    const winPerc =
+      team["Team Win%"] !== undefined
+        ? (team["Team Win%"] * 100).toFixed(2) + "%"
+        : "";
+
+    /* Desktop row */
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${rank}</td>
+      <td>${uniqueTeams}</td>
+      <td>${matchesPlayed}</td>
+      <td>${wins}</td>
+      <td>${loses}</td>
+      <td>${pointsCombined}</td>
+      <td>${difference}</td>
+      <td>${winPerc}</td>
+    `;
+    tbody.appendChild(tr);
+
+    /* Mobile card */
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="rank">#${rank}</div>
+        <div class="player-name">${uniqueTeams}</div>
+      </div>
+      <div class="card-row"><span class="label">Matches Played</span><span class="value">${matchesPlayed}</span></div>
+      <div class="card-row"><span class="label">Wins</span><span class="value">${wins}</span></div>
+      <div class="card-row"><span class="label">Loses</span><span class="value">${loses}</span></div>
+      <div class="card-row"><span class="label">Points Combined</span><span class="value">${pointsCombined}</span></div>
+      <div class="card-row"><span class="label">Difference</span><span class="value">${difference}</span></div>
+      <div class="card-row"><span class="label">Win %</span><span class="value">${winPerc}</span></div>
+    `;
+    cardContainer.appendChild(card);
+  });
+}
+
+/* ---------- Load Teams Data ---------- */
+loadTeamsSheetData();
+//setInterval(loadTeamsSheetData, 5000);
 </script>
 <footer class="site-footer">
   <div class="footer-inner">

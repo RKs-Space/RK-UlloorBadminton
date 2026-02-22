@@ -3,16 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ulloor Badminton</title>
+<title>About Us — Ulloor Badminton</title>
 <link rel="icon" type="image/x-icon" href="ulb.png">
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   referrerpolicy="no-referrer"
 />
-
-
-
 <style>
 :root{
   --accent1:#28a745;
@@ -25,11 +22,33 @@
 }
 
 *{box-sizing:border-box}
+html{scrollbar-gutter:stable}
 html,body{margin:0;font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif}
-body{transition:.3s}
+body{
+  transition:.3s;
+  background: url("herobg.jpg") center/cover no-repeat fixed;
+  position: relative;
+}
 
 body.light{background:var(--light-bg);color:#0b1220}
 body.dark{background:var(--dark-bg);color:#e6eef8}
+
+/* Override body background for both themes while keeping bg image */
+body {
+  background: url("herobg.jpg") center/cover no-repeat fixed !important;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+  pointer-events: none;
+  z-index: -1;
+}
 
 /* ================= NAVBAR ================= */
 .navbar{
@@ -53,7 +72,7 @@ body.dark .navbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap: 16px; /* add some spacing between nav items and toggle */
+  gap: 16px;
 }
 
 .logo{
@@ -70,22 +89,20 @@ body.dark .navbar{
   object-fit:cover;
 }
 .logo a {
-  text-decoration: none;  /* remove underline */
-  color: inherit;         /* inherit text color from parent */
-  display: flex;          /* keep the flex layout */
+  text-decoration: none;
+  color: inherit;
+  display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Nav items */
 .nav-items {
   display: flex;
   gap: 16px;
   align-items: center;
-  margin-left: auto;/* ensures it doesn’t overlap toggle */
+  margin-left: auto;
 }
 
-/* Glass-like button */
 .nav-link {
   text-decoration: none;
   color: inherit;
@@ -105,7 +122,6 @@ body.dark .nav-link {
   background: rgba(255,255,255,0.35);
 }
 
-/* Hamburger menu for mobile */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -121,7 +137,6 @@ body.dark .nav-link {
   border-radius: 2px;
 }
 
-/* Mobile overlay menu */
 .mobile-menu {
   display: none;
   position: fixed;
@@ -141,12 +156,10 @@ body.dark .nav-link {
   transition:.3s;
 }
 
-/* Mobile menu active */
 .mobile-menu.active {
   display: flex;
 }
 
-/* Mobile links */
 .mobile-menu a {
   font-size: 2rem;
   text-decoration: none;
@@ -162,7 +175,6 @@ body.dark .nav-link {
   background: rgba(255,255,255,0.25);
 }
 
-/* Close button */
 #closeMenu {
   position: absolute;
   top: 20px;
@@ -177,7 +189,6 @@ body.dark .nav-link {
   z-index: 3100;
 }
 
-/* Theme-aware mobile menu */
 body.light .mobile-menu {
   background: rgba(255,255,255,0.9);
 }
@@ -192,65 +203,144 @@ body.light #closeMenu {
   background: rgba(0,0,0,0.05);
 }
 
-/* Hamburger visible only on mobile */
 @media (max-width:768px){
   .nav-items {display:none;}
   .hamburger {display:flex;}
 }
 
-/* Theme toggle */
 .theme-toggle{
   display:flex;
   align-items:center;
   gap:8px;
   cursor:pointer;
   font-size:1.2rem;
-  margin-left: 16px; /* extra space from nav items */
 }
 
-/* ================= HERO ================= */
-.hero {
-  position: relative;
+/* ================= MAIN CONTENT ================= */
+.main-content {
+  padding-top: 100px;
   min-height: 100vh;
-  padding-top: 90px;
-  background: url("herobg.jpg") center/cover no-repeat;
-}
-.hero::after {
-  content:'';
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.75));
-  z-index:0;
-}
-.hero-inner{
-  max-width:var(--max-width);
-  margin:auto;
-  padding:40px 20px;
-  position: relative;
-  z-index: 1;
-}
-.hero-title{
-  font-size:3rem;
-  font-weight:900;
-  color:#fff;
-  line-height:1.1;
-}
-.hero-title span{color:var(--accent2)}
-.hero-sub{
-  max-width:520px;
-  color:#e6eef8;
-  margin:16px 0 28px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-
-/* Desktop / large screens only */
-@media (min-width: 769px) {
-  .hero-inner {
-    margin: 100px 80px;
-  }
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 40px;
+  color: var(--accent1);
+  text-align: center;
 }
 
+body.light .page-title {
+  color: var(--accent1);
+}
+
+.content-section {
+  margin-bottom: 60px;
+  padding: 30px;
+  background: rgba(18,22,28,.95);
+  border-radius: 12px;
+  border-left: 4px solid var(--accent1);
+}
+
+body.light .content-section {
+  background: rgba(255,255,255,.35);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+.content-section h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: var(--accent2);
+}
+
+body.light .content-section h2 {
+  color: var(--accent1);
+}
+
+.content-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: inherit;
+}
+
+.highlight {
+  color: var(--accent2);
+  font-weight: 700;
+}
+
+body.light .highlight {
+  color: var(--accent1);
+}
+
+/* ================= JERSEY SHOWCASE ================= */
+.jersey-showcase {
+  margin-bottom: 60px;
+  padding: 40px;
+  background: rgba(18,22,28,.95);
+  border-radius: 12px;
+  border: 2px solid var(--accent1);
+  text-align: center;
+}
+
+body.light .jersey-showcase {
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  border-color: rgba(40, 167, 69, 0.5);
+}
+
+.jersey-showcase h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 30px;
+  color: var(--accent2);
+}
+
+body.light .jersey-showcase h2 {
+  color: var(--accent1);
+}
+
+.jersey-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  min-height: 400px;
+  background: rgba(10, 12, 16, 0.8);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--accent1);
+}
+
+body.light .jersey-container {
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  border-color: rgba(40, 167, 69, 0.5);
+}
+
+.jersey-placeholder {
+  text-align: center;
+  color: var(--muted-light);
+  font-size: 1rem;
+}
+
+body.light .jersey-placeholder {
+  color: var(--muted-light);
+}
+
+.jersey-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
 
 /* ================= FOOTER ================= */
 .site-footer{
@@ -259,6 +349,7 @@ body.light #closeMenu {
   display:flex;
   justify-content:center;
 }
+
 .footer-inner{
   width:100%;
   max-width:var(--max-width);
@@ -267,15 +358,22 @@ body.light #closeMenu {
   align-items:center;
   opacity:.75;
 }
-.footer-inner:hover{opacity:1;}
+
+.footer-inner:hover{
+  opacity:1;
+}
+
 .copyright{
   color:var(--muted-light);
 }
-body.dark .copyright{color:var(--muted-dark);}
-/* YouTube icon clean style */
+
+body.dark .copyright{
+  color:var(--muted-dark);
+}
+
 .yt-link {
-  text-decoration: none;     /* remove underline */
-  color: #ff0000;            /* official YouTube red */
+  text-decoration: none;
+  color: #ff0000;
   display: inline-flex;
   align-items: center;
   font-size: 1.6rem;
@@ -284,7 +382,6 @@ body.dark .copyright{color:var(--muted-dark);}
   background: rgba(255, 0, 0, 0.08);
 }
 
-/* Prevent visited / active color changes */
 .yt-link:visited,
 .yt-link:active,
 .yt-link:focus {
@@ -292,46 +389,11 @@ body.dark .copyright{color:var(--muted-dark);}
   outline: none;
 }
 
-/* Hover effect */
 .yt-link:hover {
   transform: scale(1.15);
   color: #ff0000;
 }
 
-.hero-cta{
-  background:linear-gradient(90deg,var(--accent1),var(--accent2));
-  border:none;
-  padding:14px 28px;
-  border-radius:999px;
-  font-weight:900;
-  cursor:pointer;
-
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-/* YouTube badge */
-.yt-badge{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  background:#ff0000; /* PURE YouTube red */
-  box-shadow:
-    0 4px 10px rgba(255,0,0,.4),
-    inset 0 0 0 1px rgba(255,255,255,.25);
-}
-
-.yt-badge i{
-  color:#fff;
-  font-size:1.15rem;
-}
-
-
-/*Mobile Footer Modification*/
 @media (max-width: 480px) {
   .site-footer {
     text-align: center;
@@ -340,25 +402,39 @@ body.dark .copyright{color:var(--muted-dark);}
     flex-direction: column;
     gap: 6px;
   }
+  
+  .main-content {
+    padding-top: 80px;
+  }
+  
+  .page-title {
+    font-size: 1.8rem;
+  }
+  
+  .content-section {
+    padding: 20px;
+  }
+  
+  .jersey-showcase {
+    padding: 20px;
+  }
 }
-/*Mobile Footer Modification End*/
 </style>
 </head>
 
-<body class="light">
+<body class="dark">
 
 <!-- NAVBAR -->
 <div class="navbar">
   <div class="nav-inner">
     
     <div class="logo">
-      <a href="/RK-UlloorBadminton/index.html">
+      <a href="index.html">
       <img src="ulb.png" alt="Ulloor Badminton">
       Ulloor Badminton
       </a>
     </div>
   
-
     <div class="nav-items">
       <a href="Tournament.html" class="nav-link">Tournaments</a>
       <a href="About.html" class="nav-link">About Us</a>
@@ -387,7 +463,6 @@ body.dark .copyright{color:var(--muted-dark);}
       </svg>
     </div>
 
-    <!-- Hamburger for mobile -->
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
@@ -395,39 +470,80 @@ body.dark .copyright{color:var(--muted-dark);}
     </div>
   </div>
 
-  <!-- Mobile overlay menu -->
   <div class="mobile-menu" id="mobileMenu">
     <button type="button" id="closeMenu">✕</button>
     <a href="Tournament.html">Tournaments</a>
-    <a href="\">About us</a>
-    <a href="\">Contact</a>
+    <a href="About.html">About Us</a>
+    <a href="Contact.html">Contact</a>
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <h1 class="hero-title">
-      Smash to Glory<br>
-      <span>Ulloor Badminton</span>
-    </h1>
-    <p class="hero-sub">
-      Competitive badminton tournaments with live champions and rankings powered directly from match sheets.
+<!-- MAIN CONTENT -->
+<div class="main-content">
+  <h1 class="page-title">About Ulloor Badminton</h1>
+
+  <div class="content-section">
+    <h2>🎯 Our Mission</h2>
+    <p>
+      At <span class="highlight">Ulloor Badminton</span>, we are passionate about promoting badminton as a competitive sport and building a vibrant community of players who share our dedication to excellence. Our mission is to organize world-class tournaments that bring together talented badminton enthusiasts from across the region.
     </p>
-    <button class="hero-cta yt-btn"
-  onclick="window.open('https://www.youtube.com/@ulloorbadminton00','_blank')">
-  Our YouTube Channel
-  <span class="yt-badge">
-    <i class="fa-brands fa-youtube"></i>
-  </span>
-</button>
-
-
   </div>
-</section>
+
+  <div class="content-section">
+    <h2>🏆 What We Do</h2>
+    <p>
+      We host prestigious badminton tournaments that showcase talent, foster healthy competition, and create unforgettable experiences for players and fans alike. From singles to doubles, our tournaments are designed to challenge players at all levels and celebrate the beautiful game of badminton.
+    </p>
+    <p>
+      Our events are meticulously organized with professional standards, fair play principles, and a commitment to creating an inclusive environment where every player can showcase their skills and compete with pride.
+    </p>
+  </div>
+
+  <div class="content-section">
+    <h2>💚 Our Values</h2>
+    <p>
+      <span class="highlight">Excellence:</span> We strive for the highest quality in every tournament we organize.
+    </p>
+    <p>
+      <span class="highlight">Community:</span> We believe in building strong connections among players and fans.
+    </p>
+    <p>
+      <span class="highlight">Fair Play:</span> Integrity and sportsmanship are at the heart of everything we do.
+    </p>
+    <p>
+      <span class="highlight">Innovation:</span> We continuously evolve our tournaments to provide the best experience.
+    </p>
+  </div>
+
+  <!-- JERSEY SHOWCASE SECTION -->
+  <div class="jersey-showcase">
+    <h2>👕 Our Team Jersey Showcase</h2>
+    <div class="jersey-container">
+      <img id="jerseyImage" src="J1.jpeg" alt="Team Jersey" class="jersey-image">
+      <!-- <div class="jersey-placeholder">
+        <p>✨ Team Jersey Coming Soon ✨</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Upload your image to showcase the official Ulloor Badminton team jerseys</p>
+      </div> -->
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="copyright">
+      © <span id="year"></span>  Ulloor Badminton. Conceptualised, developed, and maintained by Rahul. All rights reserved.
+    </span>
+    <a class="yt-link" href="https://www.youtube.com/@ulloorbadminton00" target="_blank" aria-label="YouTube">
+      <i class="fa-brands fa-youtube"></i>
+    </a>    
+  </div>
+</footer>
+
 
 <script>
-// Theme toggle
+  // Theme toggle
 const bodyEl = document.body;
 const sunIcon = document.getElementById("sunIcon");
 const moonIcon = document.getElementById("moonIcon");
@@ -460,20 +576,8 @@ closeMenu.onclick = () => {
   hamburger.style.display = 'flex';
   document.body.style.overflow = "auto";
 };
-</script>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span class="copyright">
-      © <span id="year"></span> Ulloor Badminton. Conceptualised, developed, and maintained by Rahul. All rights reserved.
-    </span>
-    <a class="yt-link" href="https://www.youtube.com/@ulloorbadminton00" target="_blank" aria-label="YouTube">
-      <i class="fa-brands fa-youtube"></i>
-    </a>    
-  </div>
-</footer>
-
-<script>
+// Year
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
