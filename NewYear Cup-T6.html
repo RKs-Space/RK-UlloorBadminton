@@ -537,6 +537,14 @@ table {
   margin-bottom: 20px; /* space between image and content */
   margin-top: 10px;
 }
+/* Allow wrapping for Team Names column */
+.team-name-col {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  word-break: break-word;
+}
+
 /*Table Styles*/
 
 /* ================= COLLAPSIBLE STYLES ================= */
@@ -760,12 +768,12 @@ table {
         <thead>
           <tr>
             <th>Rank</th>
-            <th>Unique Teams</th>
-            <th>Matches Played</th>
+            <th class="team-name-col">Unique Teams</th>
+            <th class="team-name-col">Matches Played</th>
             <th>Wins</th>
             <th>Loses</th>
-            <th>Per Match Avg Diff</th>
-            <th>Difference</th>
+            <th class="team-name-col">Per Match Avg Diff</th>
+            <th class="team-name-col">Difference</th>
             <th>Win%</th>
           </tr>
         </thead>
@@ -995,7 +1003,7 @@ async function loadTeamsSheetData() {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${rank}</td>
-      <td>${uniqueTeams}</td>
+      <td class="team-name-col">${uniqueTeams}</td>
       <td>${matchesPlayed}</td>
       <td>${wins}</td>
       <td>${loses}</td>
